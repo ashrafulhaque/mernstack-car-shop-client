@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const user = null;
+  //const user = { displayName: "Md. Ashraful Haque" };
   return (
     <>
       <div className="navbar bg-base-100 border border-b-2 sticky top-0 z-50">
@@ -73,30 +74,15 @@ const Navbar = () => {
               </NavLink>
             </div>
           ) : (
-            <div className="flex items-center">
-              <span className="text-pink-800 text-center font-semibold text-sm">
-                Hello!<br></br>
-                {user?.displayName}
-              </span>
-              <div className="dropdown dropdown-end">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn btn-ghost btn-circle avatar"
-                >
-                  <div className="w-10 rounded-full">
-                    <img alt="Profile Image" src={user?.photoURL} />
-                  </div>
-                </div>
-
-                <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-                >
-                  <li className="py-2">
-                    <Link>Logout</Link>
-                  </li>
-                </ul>
+            <div className="flex items-center gap-2">
+              <div>
+                <span className="text-pink-800 text-center font-semibold text-sm">
+                  Hello!<br></br>
+                  {user?.displayName}
+                </span>
+              </div>
+              <div className="btn btn-outline">
+                <Link to="/dashboard">Dashboard</Link>
               </div>
             </div>
           )}

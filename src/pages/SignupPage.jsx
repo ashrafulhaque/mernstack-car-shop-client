@@ -1,7 +1,11 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 const SignupPage = () => {
+  const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const handleSignup = (event) => {
     event.preventDefault();
 
@@ -13,6 +17,15 @@ const SignupPage = () => {
     const phone = form.get("phone");
     const address = form.get("address");
     console.log(displayName, email, password, phone, address);
+
+    createUser(displayName, email, password, phone, address)
+      .then((result) => {
+        console.log("User created successfully!");
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <>

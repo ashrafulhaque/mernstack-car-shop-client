@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const handleEmailLogin = null;
-  const handleGithubLogin = null;
-  const handleGoogleLogin = null;
 
   return (
     <div className="max-w-[400px] mx-auto border border-gray-200 p-4 my-5 shadow-md">
@@ -41,16 +39,8 @@ const LoginPage = () => {
           Login With Email
         </button>
       </form>
-      <div className="grid grid-cols-2 gap-2 justify-around">
-        <button onClick={handleGoogleLogin} className="btn btn-accent my-3">
-          Login With Google
-        </button>
-        <button onClick={handleGithubLogin} className="btn btn-warning my-3">
-          Login With Github
-        </button>
-      </div>
 
-      <p className="text-center bold">
+      <p className="text-center bold py-3">
         Don't have an account?{" "}
         <Link className="text-lime-600 underline" to="/signup">
           Signup Here

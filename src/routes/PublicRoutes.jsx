@@ -5,9 +5,10 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
 import ProductsPage from "../pages/AllProductsPage";
-import ProductDetails from "../pages/ProductDetailsPage";
-import PrivateRoutes from "./PrivateRoutes";
 import ProductsByCatPage from "../pages/ProductsByCatPage";
+import ProductDetailsPage from "../pages/ProductDetailsPage";
+import Dashboard from "../dashboard/Dashboard";
+import PrivateRoutes from "./PrivateRoutes";
 
 const router = createBrowserRouter([
   {
@@ -26,29 +27,17 @@ const router = createBrowserRouter([
         path: "signup",
         element: <SignupPage />,
       },
+      {
+        path: "/allproducts",
+        element: <ProductsPage />,
+      },
     ],
   },
   {
-    path: "/allproducts",
+    path: "/dashboard",
     element: (
       <PrivateRoutes>
-        <ProductsPage />
-      </PrivateRoutes>
-    ),
-  },
-  {
-    path: "/allproducts/:category",
-    element: (
-      <PrivateRoutes>
-        <ProductsByCatPage />
-      </PrivateRoutes>
-    ),
-  },
-  {
-    path: "/allproducts/:id",
-    element: (
-      <PrivateRoutes>
-        <ProductDetails />
+        <Dashboard />
       </PrivateRoutes>
     ),
   },
