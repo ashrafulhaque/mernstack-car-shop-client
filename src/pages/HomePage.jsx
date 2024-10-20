@@ -1,9 +1,10 @@
 import React from "react";
+import Banner from "../components/Banner";
 
 const HomePage = () => {
   return (
     <>
-      <h1>Need for Speed Carshop</h1>
+      <Banner />
     </>
   );
 };

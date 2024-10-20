@@ -37,9 +37,12 @@ const Navbar = () => {
             </ul>
           </div>
 
-          <Link to="/" className="btn btn-ghost text-xl font-courgette">
+          <Link
+            to="/"
+            className="btn btn-ghost text-xl font-courgette hover:bg-inherit"
+          >
             <img src="/nfslogo.png" className="w-14 font-sans" alt="Logo" />
-            <span className="hidden md:block">NFS CARSHOP</span>
+            <span className="hidden md:block font-bold">NFS CARSHOP</span>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
