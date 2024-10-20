@@ -1,8 +1,46 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
-  const handleEmailLogin = null;
+  const { loginWithEmail } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Get the "redirectPath" from state or default to "/dashboard"
+  const redirectPath = location.state?.redirectPath || "/dashboard";
+
+  const handleEmailLogin = (event) => {
+    event.preventDefault();
+    console.log("Email Login clicked");
+    const form = new FormData(event.currentTarget);
+
+    const email = form.get("email");
+    const password = form.get("password");
+
+    loginWithEmail(email, password)
+      .then(() => {
+        navigate(redirectPath, { replace: true });
+        toast("Congratulations! You've logged in successfully.", {
+          position: "bottom-right",
+          style: {
+            background: "green",
+            color: "white",
+          },
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Sorry! Error occurred during login.", {
+          position: "bottom-right",
+          style: {
+            background: "red",
+            color: "white",
+          },
+        });
+      });
+  };
 
   return (
     <div className="max-w-[400px] mx-auto border border-gray-200 p-4 my-5 shadow-md">

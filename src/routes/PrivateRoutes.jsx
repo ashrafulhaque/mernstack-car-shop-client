@@ -4,11 +4,12 @@ import { Navigate, useLocation } from "react-router-dom";
 
 const PrivateRoutes = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
-  const location = useLocation(); // Get the current path for redirection later
+  // Get the current path for redirection later
+  const location = useLocation();
 
-  // If the authentication state is still loading, don't render anything yet.
+  // If the authentication state is still loading don't render anything
   if (loading) {
-    return <div>Loading...</div>; // You can replace this with a spinner or a loading screen.
+    return <div>Loading...</div>;
   }
 
   // If the user is authenticated, render the requested route
@@ -16,7 +17,7 @@ const PrivateRoutes = ({ children }) => {
     return children;
   }
 
-  // Otherwise, redirect to the login page and pass the current location (for redirecting back after login)
+  // Otherwise, redirect to the login page and pass the current location
   return (
     <Navigate to="/login" replace state={{ redirectPath: location.pathname }} />
   );
