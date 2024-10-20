@@ -1,28 +1,35 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import toast from "react-hot-toast";
 
 const LoginPage = () => {
-  const { loginWithEmail } = useContext(AuthContext);
+  const { loginWithEmail, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   // Get the "redirectPath" from state or default to "/dashboard"
   const redirectPath = location.state?.redirectPath || "/dashboard";
 
+  useEffect(() => {
+    // Redirect to dashboard if the user is already logged in
+    if (user) {
+      navigate(redirectPath, { replace: true });
+    }
+  }, [user, navigate, redirectPath]);
+
   const handleEmailLogin = (event) => {
     event.preventDefault();
     console.log("Email Login clicked");
-    const form = new FormData(event.currentTarget);
 
+    const form = new FormData(event.currentTarget);
     const email = form.get("email");
     const password = form.get("password");
 
     loginWithEmail(email, password)
       .then(() => {
         navigate(redirectPath, { replace: true });
-        toast("Congratulations! You've logged in successfully.", {
+        toast.success("Congratulations! You've logged in successfully.", {
           position: "bottom-right",
           style: {
             background: "green",
@@ -31,8 +38,17 @@ const LoginPage = () => {
         });
       })
       .catch((error) => {
-        console.log(error);
-        toast.error("Sorry! Error occurred during login.", {
+        console.error("Login failed:", error); // Log error for debugging
+
+        // Display a detailed error message based on Firebase error code
+        let errorMessage = "Sorry! An error occurred during login.";
+        if (error.code === "auth/wrong-password") {
+          errorMessage = "Incorrect password.";
+        } else if (error.code === "auth/invalid-credential") {
+          errorMessage = "No account found with this email.";
+        }
+
+        toast.error(errorMessage, {
           position: "bottom-right",
           style: {
             background: "red",

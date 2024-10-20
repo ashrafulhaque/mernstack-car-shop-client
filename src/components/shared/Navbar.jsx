@@ -1,9 +1,20 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
-  const user = null;
-  //const user = { displayName: "Md. Ashraful Haque" };
+  const { user, userLogout } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Check if the current route is '/dashboard'
+  const isDashboardRoute = location.pathname === "/dashboard";
+
+  const handleLogout = () => {
+    userLogout();
+    navigate("/login");
+  };
   return (
     <>
       <div className="navbar bg-base-100 border border-b-2 sticky top-0 z-50">
@@ -75,15 +86,23 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <div>
+              <div className="text-center">
                 <span className="text-pink-800 text-center font-semibold text-sm">
                   Hello!<br></br>
                   {user?.displayName}
                 </span>
               </div>
-              <div className="btn btn-outline">
-                <Link to="/dashboard">Dashboard</Link>
-              </div>
+              {!isDashboardRoute ? (
+                // Show Dashboard button if not on /dashboard
+                <div className="btn btn-info">
+                  <Link to="/dashboard">Dashboard</Link>
+                </div>
+              ) : (
+                // Show Logout button if on /dashboard
+                <div className="btn btn-error" onClick={handleLogout}>
+                  Logout
+                </div>
+              )}
             </div>
           )}
         </div>

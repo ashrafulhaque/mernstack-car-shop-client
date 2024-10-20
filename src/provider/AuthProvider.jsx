@@ -34,6 +34,7 @@ const AuthProvider = ({ children }) => {
       setUser(auth.currentUser);
     } catch (error) {
       console.error("Error creating user:", error);
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -45,7 +46,8 @@ const AuthProvider = ({ children }) => {
       await signInWithEmailAndPassword(auth, email, password);
       setUser(auth.currentUser);
     } catch (error) {
-      console.error("Error logging in with email:", error);
+      console.error("Error during login from:", error);
+      throw error;
     } finally {
       setLoading(false);
     }

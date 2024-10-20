@@ -1,7 +1,12 @@
 import React from "react";
+import Navbar from "../components/shared/Navbar";
 
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 };
 
 export default Dashboard;
