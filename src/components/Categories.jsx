@@ -36,13 +36,15 @@ const Categories = () => {
   }
   return (
     <>
-      <h2 className="font-serif text-5xl py-6 font-bold text-center border-b-4 border-b-gray-200 ">
-        Product Categories
+      <h2 className="font-serif text-5xl py-6 font-bold text-white text-center bg-yellow-500 border-y-4 border-y-gray-300">
+        Product <span className="text-gray-900">Categories</span>
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-10 my-5">
-        {courses.map((course) => (
-          <CategoryCard key={course._id} course={course} />
-        ))}
+      <div className="container w-[90%] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-5">
+          {courses.map((course) => (
+            <CategoryCard key={course._id} course={course} />
+          ))}
+        </div>
       </div>
     </>
   );
