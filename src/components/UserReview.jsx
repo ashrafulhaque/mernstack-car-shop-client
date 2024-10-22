@@ -11,7 +11,7 @@ const UserReview = () => {
           <div className="card bg-base-100 shadow-xl rounded-none">
             <div className="card-body">
               <img
-                src="/jasonstatham.jpg"
+                src="/jason-statham.jpg"
                 alt="Image of Jason Statham"
                 className="w-36 h-36 rounded-full mx-auto"
               />
