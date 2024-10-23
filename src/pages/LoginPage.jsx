@@ -21,7 +21,6 @@ const LoginPage = () => {
 
   const handleEmailLogin = (event) => {
     event.preventDefault();
-    console.log("Email Login clicked");
 
     const form = new FormData(event.currentTarget);
     const email = form.get("email");

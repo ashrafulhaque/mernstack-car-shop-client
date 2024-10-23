@@ -32,6 +32,24 @@ const AuthProvider = ({ children }) => {
       await auth.currentUser.reload();
       // Update the user state with the new information
       setUser(auth.currentUser);
+
+      const dbResponse = await fetch("http://localhost:5000/userList", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          uid: res.user.uid,
+          displayName: res.user.displayName,
+          email: res.user.email,
+          phone: phone,
+          address: address,
+          role: "user",
+        }),
+      });
+      if (!dbResponse.ok) {
+        throw new Error("Failed to save user data to the database.");
+      }
     } catch (error) {
       console.error("Error creating user:", error);
       throw error;
