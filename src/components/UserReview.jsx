@@ -3,7 +3,7 @@ import React from "react";
 const UserReview = () => {
   return (
     <div>
-      <h2 className="font-play text-5xl py-6 text-center font-bold bg-orange-600 border-y-4 border-y-[#ec517d]">
+      <h2 className="font-play text-5xl py-6 text-center font-bold bg-orange-600 border-y-4 border-y-gray-300">
         <span className="text-white"> Customer </span>Reviews
       </h2>
       <section className="bg-[url('./reviewbg.jpg')] bg-cover bg-repeat-y sm:bg-no-repeat bg-center w-full py-10">

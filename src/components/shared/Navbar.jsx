@@ -94,12 +94,15 @@ const Navbar = () => {
               </div>
               {!isDashboardRoute ? (
                 // Show Dashboard button if not on /dashboard
-                <div className="btn btn-info">
+                <div className="btn btn-info min-h-10 h-10">
                   <Link to="/dashboard">Dashboard</Link>
                 </div>
               ) : (
                 // Show Logout button if on /dashboard
-                <div className="btn btn-error" onClick={handleLogout}>
+                <div
+                  className="btn btn-error min-h-10 h-10"
+                  onClick={handleLogout}
+                >
                   Logout
                 </div>
               )}

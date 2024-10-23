@@ -3,6 +3,7 @@ import Banner from "../components/Banner";
 import Categories from "../components/Categories";
 import UserReview from "../components/UserReview";
 import { Helmet } from "react-helmet-async";
+import BestSellers from "../components/BestSellers";
 
 const HomePage = () => {
   return (
@@ -12,6 +13,7 @@ const HomePage = () => {
       </Helmet>
       <Banner />
       <Categories />
+      <BestSellers />
       <UserReview />
     </>
   );
