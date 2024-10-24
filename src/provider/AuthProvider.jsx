@@ -86,8 +86,24 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     setPersistence(auth, browserLocalPersistence)
       .then(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-          setUser(currentUser);
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+          console.log(currentUser);
+          if (currentUser) {
+            try {
+              const response = await fetch(
+                `http://localhost:5000/userList/${currentUser.uid}`
+              );
+
+              if (!response.ok) {
+                throw new error("Failed to fetch");
+              }
+
+              const data = await response.json();
+              setUser(data);
+            } catch (error) {}
+          } else {
+            setUser(null);
+          }
           setLoading(false);
         });
         return () => unsubscribe();

@@ -43,7 +43,7 @@ const BestSellers = () => {
                 src="/bestsellers/jeep-wrangler.jpg"
                 alt="image of Chevrolet Trax"
               />
-              <div className="card-body p-0 mb-6 ml-6">
+              <div className="card-body p-0 mb-10 ml-6">
                 <h5 className="card-title">Jeep Wrangler</h5>
                 <p className="card-text text-yellow-700 font-bold">$32499.99</p>
                 <p className="card-text text-gray-600 font-[12px] text-justify">
@@ -59,7 +59,7 @@ const BestSellers = () => {
                 src="/bestsellers/kia-telluride.jpg"
                 alt="image of kia-telluride"
               />
-              <div className="card-body p-0 mb-6 ml-6">
+              <div className="card-body p-0 mb-10 ml-6">
                 <h5 className="card-title">Kia Telluride</h5>
                 <p className="card-text text-yellow-700 font-bold">$17699.99</p>
                 <p className="card-text text-gray-600 font-[12px] text-justify">
@@ -75,7 +75,7 @@ const BestSellers = () => {
                 src="/bestsellers/chevrolet-trax.jpg"
                 alt="image of Chevrolet Trax"
               />
-              <div className="card-body p-0 mb-6 ml-6">
+              <div className="card-body p-0 mb-10 ml-6">
                 <h5 className="card-title">Chevrolet Trax</h5>
                 <p className="card-text text-yellow-700 font-bold">$99.99</p>
                 <p className="card-text text-gray-600 font-[12px] text-justify">
@@ -91,7 +91,7 @@ const BestSellers = () => {
                 src="/bestsellers/maserati-grecale-folgore.jpg"
                 alt="image of Chevrolet Trax"
               />
-              <div className="card-body p-0 mb-6 ml-6">
+              <div className="card-body p-0 mb-10 ml-6">
                 <h5 className="card-title">Maserati Folgore</h5>
                 <p className="card-text text-yellow-700 font-bold">$21499.99</p>
                 <p className="card-text text-gray-600 font-[12px] text-justify">
@@ -107,7 +107,7 @@ const BestSellers = () => {
                 src="/bestsellers/tesla-model-y.jpg"
                 alt="image of Chevrolet Trax"
               />
-              <div className="card-body p-0 mb-6 ml-6">
+              <div className="card-body p-0 mb-10 ml-6">
                 <h5 className="card-title">Tesla Model Y</h5>
                 <p className="card-text text-yellow-700 font-bold">$19799.99</p>
                 <p className="card-text text-gray-600 font-[12px] text-justify">
@@ -123,7 +123,7 @@ const BestSellers = () => {
                 src="/bestsellers/toyota-grand-highlander.jpg"
                 alt="image of Chevrolet Trax"
               />
-              <div className="card-body p-0 mb-6 ml-6">
+              <div className="card-body p-0 mb-10 ml-6">
                 <h5 className="card-title">Toyota Highlander</h5>
                 <p className="card-text text-yellow-700 font-bold">$25799.99</p>
                 <p className="card-text text-gray-600 font-[12px] text-justify">

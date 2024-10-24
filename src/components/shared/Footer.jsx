@@ -24,7 +24,14 @@ const Footer = () => {
           <h6 className="footer-title">Social Links</h6>
           <a
             className="link link-hover"
-            href="http://x.com/imashrafulhaque"
+            href="https://www.linkedin.com/in/imashrafulhaque/"
+            target="_blank"
+          >
+            Linkedin
+          </a>
+          <a
+            className="link link-hover"
+            href="https://x.com/imashrafulhaque"
             target="_blank"
           >
             Twitter
@@ -32,24 +39,18 @@ const Footer = () => {
 
           <a
             className="link link-hover"
-            href="http://facebook.com/imashrafulhaque"
+            href="https://github.com/ashrafulhaque"
             target="_blank"
           >
-            Facebook
+            Github
           </a>
+
           <a
             className="link link-hover"
-            href="http://linkedin.com/imashrafulhaque"
+            href="https://www.youtube.com/@troubleshootprogramming4452"
             target="_blank"
           >
-            Linkedin
-          </a>
-          <a
-            className="link link-hover"
-            href="http://google.com/ashrafulhaque"
-            target="_blank"
-          >
-            Google Plus
+            Youtube
           </a>
         </nav>
         <div>
