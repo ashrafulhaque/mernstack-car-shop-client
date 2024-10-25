@@ -45,6 +45,7 @@ const AuthProvider = ({ children }) => {
           photoURL: photoURL,
           address: address,
           isAdmin: false,
+          isActive: true,
         }),
       });
       if (!dbResponse.ok) {
@@ -57,7 +58,26 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   };
+  const updateProfile = async (userUpdateData) => {
+    setLoading(true);
+    try {
+      // Make API call to update user information
+      const dbResponse = await fetch(`http://localhost:5000/user/${user._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userUpdateData),
+      });
 
+      setUser((prevUser) => ({ ...prevUser, ...userUpdateData }));
+    } catch (error) {
+      console.error("Error updating user profile:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
   const loginWithEmail = async (email, password) => {
     setLoading(true);
     try {
@@ -87,7 +107,6 @@ const AuthProvider = ({ children }) => {
     setPersistence(auth, browserLocalPersistence)
       .then(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-          console.log(currentUser);
           if (currentUser) {
             try {
               const response = await fetch(
@@ -95,7 +114,7 @@ const AuthProvider = ({ children }) => {
               );
 
               if (!response.ok) {
-                throw new error("Failed to fetch");
+                throw new error("Failed to fetch userdata from database");
               }
 
               const data = await response.json();
@@ -116,6 +135,7 @@ const AuthProvider = ({ children }) => {
 
   const authInfo = {
     createUser,
+    updateProfile,
     loginWithEmail,
     user,
     userLogout,

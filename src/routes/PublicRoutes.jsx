@@ -10,6 +10,7 @@ import ProductsByCatPage from "../pages/ProductsByCatPage";
 import ProductDetailsPage from "../pages/ProductDetailsPage";
 import Dashboard from "../dashboard/Dashboard";
 import PrivateRoutes from "./PrivateRoutes";
+import Profile from "../dashboard/Profile";
 
 const router = createBrowserRouter([
   {
@@ -45,7 +46,13 @@ const router = createBrowserRouter([
         <DashboardLayout />
       </PrivateRoutes>
     ),
-    children: [{ path: "/dashboard", element: <Dashboard /> }],
+    children: [
+      { path: "", element: <Profile /> },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+    ],
   },
 ]);
 
