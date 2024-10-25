@@ -18,18 +18,17 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const createUser = async (displayName, email, password, phone, address) => {
+  const createUser = async (
+    displayName,
+    email,
+    password,
+    phone,
+    photoURL,
+    address
+  ) => {
     setLoading(true);
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
-      // After the user is created, update the profile with displayName
-      await updateProfile(auth.currentUser, {
-        displayName: displayName,
-        phone: phone,
-        address: address,
-      });
-      // Reload the currentUser to get the updated profile data
-      await auth.currentUser.reload();
       // Update the user state with the new information
       setUser(auth.currentUser);
 
@@ -40,11 +39,12 @@ const AuthProvider = ({ children }) => {
         },
         body: JSON.stringify({
           uid: res.user.uid,
-          displayName: res.user.displayName,
+          displayName: displayName,
           email: res.user.email,
           phone: phone,
+          photoURL: photoURL,
           address: address,
-          role: "user",
+          isAdmin: false,
         }),
       });
       if (!dbResponse.ok) {

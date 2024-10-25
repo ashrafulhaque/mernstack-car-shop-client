@@ -43,9 +43,9 @@ const LoginPage = () => {
         // Display a detailed error message based on Firebase error code
         let errorMessage = "Sorry! An error occurred during login.";
         if (error.code === "auth/wrong-password") {
-          errorMessage = "Incorrect password.";
+          errorMessage = "Sorry, incorrect password.";
         } else if (error.code === "auth/invalid-credential") {
-          errorMessage = "No account found with this email.";
+          errorMessage = "Sorry, invalid credential.";
         }
 
         toast.error(errorMessage, {

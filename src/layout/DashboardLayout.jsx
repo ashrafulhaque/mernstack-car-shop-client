@@ -1,12 +1,12 @@
 import React from "react";
-import Navbar from "../components/shared/Navbar";
 import { Outlet } from "react-router-dom";
 import DashboardSidebar from "../dashboard/DashboardSidebar";
+import DashboardNavbar from "../dashboard/DashboardNavbar";
 
 const DashboardLayout = () => {
   return (
     <div className="flex flex-col h-screen">
-      <Navbar />
+      <DashboardNavbar />
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
         <DashboardSidebar />

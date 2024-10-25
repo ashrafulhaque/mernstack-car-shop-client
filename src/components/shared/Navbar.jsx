@@ -88,7 +88,6 @@ const Navbar = () => {
             <div className="flex items-center gap-2">
               <div className="text-center">
                 <span className="text-pink-800 text-center font-semibold text-sm">
-                  Hello!<br></br>
                   {user?.displayName}
                 </span>
               </div>

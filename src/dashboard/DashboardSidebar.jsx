@@ -7,6 +7,8 @@ import {
   FaSignOutAlt,
   FaEdit,
   FaEnvelope,
+  FaDashcube,
+  FaHome,
 } from "react-icons/fa";
 
 const DashboardSidebar = () => {
@@ -19,15 +21,29 @@ const DashboardSidebar = () => {
     navigate("/login");
   };
   return (
-    <div className="bg-gray-800 w-28 sm:w-64 text-white flex flex-col h-full">
+    <div className="bg-gray-800 w-32 sm:w-[200px] text-white flex flex-col h-full">
       {/* Adjusting width based on screen size */}
-      <div className="p-4 text-md sm:text-xl font-semibold">
-        <Link to="/dashboard" className="block">
-          Dashboard
-        </Link>
+      <div className="px-4 pt-4">
+        <div className="text-[12px] sm:text-sm text-center">
+          {/* <img
+            src={user.photoURL ? user.photoURL : "/profile-placeholder.png"}
+            className="w-20 h-20 rounded-full p-2 mx-auto"
+            alt="User Photo"
+          /> */}
+          <p>Hello,</p>
+          <p>{user?.displayName}</p>
+          <p>{user?.email}</p>
+        </div>
       </div>
-      <nav className="flex-1">
+      <div className="divider divider-neutral"></div>
+      <nav className="flex-1 text-[12px] sm:text-sm">
         <ul>
+          <li className="px-4 py-2 hover:bg-gray-700">
+            <Link to="/dashboard" className="flex items-center space-x-2">
+              <FaHome />
+              <span>Dashboard</span>
+            </Link>
+          </li>
           <li className="px-4 py-2 hover:bg-gray-700">
             <Link
               to="/dashboard/profile"
@@ -53,7 +69,7 @@ const DashboardSidebar = () => {
               className="flex items-center space-x-2"
             >
               <FaSignOutAlt />
-              Logout
+              <span>Logout</span>
             </Link>
           </li>
         </ul>
