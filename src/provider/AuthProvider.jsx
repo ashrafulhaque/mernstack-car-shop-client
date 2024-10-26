@@ -32,22 +32,25 @@ const AuthProvider = ({ children }) => {
       // Update the user state with the new information
       setUser(auth.currentUser);
 
-      const dbResponse = await fetch("http://localhost:5000/userList", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          uid: res.user.uid,
-          displayName: displayName,
-          email: res.user.email,
-          phone: phone,
-          photoURL: photoURL || "/profile-placeholder.png",
-          address: address,
-          isAdmin: false,
-          isActive: true,
-        }),
-      });
+      const dbResponse = await fetch(
+        "https://mernstack-car-shop-server.vercel.app/userList",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            uid: res.user.uid,
+            displayName: displayName,
+            email: res.user.email,
+            phone: phone,
+            photoURL: photoURL || "/profile-placeholder.png",
+            address: address,
+            isAdmin: false,
+            isActive: true,
+          }),
+        }
+      );
       if (!dbResponse.ok) {
         throw new Error("Failed to save user data to the database.");
       }
@@ -62,13 +65,16 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       // Make API call to update user information
-      const dbResponse = await fetch(`http://localhost:5000/user/${user._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userUpdateData),
-      });
+      const dbResponse = await fetch(
+        `https://mernstack-car-shop-server.vercel.app/user/${user._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userUpdateData),
+        }
+      );
 
       setUser((prevUser) => ({ ...prevUser, ...userUpdateData }));
     } catch (error) {
@@ -110,7 +116,7 @@ const AuthProvider = ({ children }) => {
           if (currentUser) {
             try {
               const response = await fetch(
-                `http://localhost:5000/userList/${currentUser.uid}`
+                `https://mernstack-car-shop-server.vercel.app/userList/${currentUser.uid}`
               );
 
               if (!response.ok) {

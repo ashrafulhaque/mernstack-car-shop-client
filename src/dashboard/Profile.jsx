@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { FiEdit } from "react-icons/fi";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const Profile = () => {
   const { user, updateProfile } = useContext(AuthContext);
@@ -62,124 +63,129 @@ const Profile = () => {
     setIsEditModalOpen(true);
   };
   return (
-    <div className="p-6 bg-white rounded-lg shadow-lg relative">
-      <div className="flex flex-col items-center">
-        <img
-          src={user?.photoURL ? user.photoURL : "/profile-placeholder.png"}
-          alt="Profile Picture"
-          className="w-36 h-36 object-cover rounded-full shadow-md"
-        />
-        <h2 className="mt-4 text-2xl font-bold text-gray-800">
-          {user?.displayName}
-        </h2>
-        <p className="text-gray-500">{user?.email}</p>
-        <div>
-          <strong
-            className={user?.isActive ? "text-green-500" : "text-red-500"}
-          >
-            {user?.isActive ? "Active" : "Blocked"}
-          </strong>
-        </div>
-      </div>
-
-      <div className="mt-6 w-full">
-        <h3 className="text-xl font-bold text-gray-700">Profile Details</h3>
-        <hr />
-        <ul className="mt-3 text-gray-600 space-y-2">
-          <li>
-            <strong>Role:</strong> {user?.isAdmin ? "Admin" : "User"}
-          </li>
-          <li>
-            <strong>Email:</strong> {user?.email}
-          </li>
-          <li>
-            <strong>Phone:</strong> {user?.phone || "N/A"}
-          </li>
-          <li>
-            <strong>Address:</strong> {user?.address || "N/A"}
-          </li>
-          <hr />
-          <li>
-            <strong>User ID:</strong> {user?.uid}
-          </li>
-        </ul>
-      </div>
-
-      {/* Edit Button with React Icon */}
-      {user?.isActive ? (
-        <button
-          className="absolute top-4 right-4 text-gray-500 hover:text-blue-600 transition-transform transform hover:scale-105"
-          onClick={handleOpenEditModal}
-        >
-          <FiEdit size={24} />
-        </button>
-      ) : null}
-
-      {/* Edit Modal */}
-      {isEditModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg w-1/3">
-            <h3 className="text-xl mb-4">Edit User</h3>
-            <div className="mb-4">
-              <label className="block text-sm font-medium">Name:</label>
-              <input
-                type="text"
-                className="w-full p-2 border rounded"
-                value={formData.displayName}
-                onChange={(e) =>
-                  setFormData({ ...formData, displayName: e.target.value })
-                }
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium">Phone:</label>
-              <input
-                type="text"
-                className="w-full p-2 border rounded"
-                value={formData.phone}
-                onChange={(e) =>
-                  setFormData({ ...formData, phone: e.target.value })
-                }
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium">Photo URL:</label>
-              <input
-                type="text"
-                className="w-full p-2 border rounded"
-                value={formData.photoURL}
-                onChange={(e) =>
-                  setFormData({ ...formData, photoURL: e.target.value })
-                }
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium">Address:</label>
-              <input
-                type="text"
-                className="w-full p-2 border rounded"
-                value={formData.address}
-                onChange={(e) =>
-                  setFormData({ ...formData, address: e.target.value })
-                }
-              />
-            </div>
-            <button
-              onClick={handleUpdate}
-              className="bg-blue-500 text-white p-2 rounded mr-2"
+    <>
+      <Helmet>
+        <title>Dashboard | Profile</title>
+      </Helmet>
+      <div className="p-6 bg-white rounded-lg shadow-lg relative">
+        <div className="flex flex-col items-center">
+          <img
+            src={user?.photoURL ? user.photoURL : "/profile-placeholder.png"}
+            alt="Profile Picture"
+            className="w-36 h-36 object-cover rounded-full shadow-md"
+          />
+          <h2 className="mt-4 text-2xl font-bold text-gray-800">
+            {user?.displayName}
+          </h2>
+          <p className="text-gray-500">{user?.email}</p>
+          <div>
+            <strong
+              className={user?.isActive ? "text-green-500" : "text-red-500"}
             >
-              Update
-            </button>
-            <button
-              onClick={() => setIsEditModalOpen(false)}
-              className="bg-gray-500 text-white p-2 rounded"
-            >
-              Cancel
-            </button>
+              {user?.isActive ? "Active" : "Blocked"}
+            </strong>
           </div>
         </div>
-      )}
-    </div>
+
+        <div className="mt-6 w-full">
+          <h3 className="text-xl font-bold text-gray-700">Profile Details</h3>
+          <hr />
+          <ul className="mt-3 text-gray-600 space-y-2">
+            <li>
+              <strong>Role:</strong> {user?.isAdmin ? "Admin" : "User"}
+            </li>
+            <li>
+              <strong>Email:</strong> {user?.email}
+            </li>
+            <li>
+              <strong>Phone:</strong> {user?.phone || "N/A"}
+            </li>
+            <li>
+              <strong>Address:</strong> {user?.address || "N/A"}
+            </li>
+            <hr />
+            <li>
+              <strong>User ID:</strong> {user?.uid}
+            </li>
+          </ul>
+        </div>
+
+        {/* Edit Button with React Icon */}
+        {user?.isActive ? (
+          <button
+            className="absolute top-4 right-4 text-gray-500 hover:text-blue-600 transition-transform transform hover:scale-105"
+            onClick={handleOpenEditModal}
+          >
+            <FiEdit size={24} />
+          </button>
+        ) : null}
+
+        {/* Edit Modal */}
+        {isEditModalOpen && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white p-6 rounded-lg w-1/3">
+              <h3 className="text-xl mb-4">Edit User</h3>
+              <div className="mb-4">
+                <label className="block text-sm font-medium">Name:</label>
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={formData.displayName}
+                  onChange={(e) =>
+                    setFormData({ ...formData, displayName: e.target.value })
+                  }
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium">Phone:</label>
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={formData.phone}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone: e.target.value })
+                  }
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium">Photo URL:</label>
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={formData.photoURL}
+                  onChange={(e) =>
+                    setFormData({ ...formData, photoURL: e.target.value })
+                  }
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium">Address:</label>
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={formData.address}
+                  onChange={(e) =>
+                    setFormData({ ...formData, address: e.target.value })
+                  }
+                />
+              </div>
+              <button
+                onClick={handleUpdate}
+                className="bg-blue-500 text-white p-2 rounded mr-2"
+              >
+                Update
+              </button>
+              <button
+                onClick={() => setIsEditModalOpen(false)}
+                className="bg-gray-500 text-white p-2 rounded"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

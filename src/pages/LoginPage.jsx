@@ -38,7 +38,7 @@ const LoginPage = () => {
         });
       })
       .catch((error) => {
-        console.error("Login failed:", error); // Log error for debugging
+        console.error("Login failed:", error);
 
         // Display a detailed error message based on Firebase error code
         let errorMessage = "Sorry! An error occurred during login.";

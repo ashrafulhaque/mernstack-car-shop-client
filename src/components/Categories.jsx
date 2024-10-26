@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import CategoryCard from "./CategoryCard";
 
 const Categories = () => {
-  const [courses, setCourses] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // Fetch data from the API endpoint
+  const BASE_URL = "https://mernstack-car-shop-server.vercel.app/categories";
+  // Fetch category data from the API endpoint
   useEffect(() => {
-    fetch("https://express-endpoint-server.vercel.app/products/")
+    fetch(BASE_URL)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -17,7 +17,7 @@ const Categories = () => {
       })
       .then((data) => {
         // Set the fetched data
-        setCourses(data);
+        setCategories(data);
         console.log("Fetched data:", data);
         setLoading(false);
       })
@@ -40,8 +40,8 @@ const Categories = () => {
       </h2>
       <div className="container w-[90%] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-5">
-          {courses.map((course) => (
-            <CategoryCard key={course._id} course={course} />
+          {categories.map((category) => (
+            <CategoryCard key={category._id} category={category} />
           ))}
         </div>
       </div>
