@@ -11,6 +11,7 @@ import ProductDetailsPage from "../pages/ProductDetailsPage";
 import Dashboard from "../dashboard/Dashboard";
 import PrivateRoutes from "./PrivateRoutes";
 import Profile from "../dashboard/Profile";
+import AllUsers from "../dashboard/AllUsers";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
+      },
+      {
+        path: "allusers",
+        element: <AllUsers />,
       },
     ],
   },

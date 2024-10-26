@@ -13,7 +13,6 @@ const Profile = () => {
     address: "",
   });
 
-  // Update user info
   const handleUpdate = async () => {
     try {
       const userUpdateData = {
@@ -34,7 +33,7 @@ const Profile = () => {
           });
         })
         .catch((error) => {
-          let errorMessage = "Error updating user profile:" + error;
+          let errorMessage = "Error updating profile: " + error;
           toast.error(errorMessage, {
             position: "bottom-right",
             style: {

@@ -1,15 +1,7 @@
 import React, { useContext } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
-import {
-  FaUser,
-  FaUsers,
-  FaSignOutAlt,
-  FaEdit,
-  FaEnvelope,
-  FaDashcube,
-  FaHome,
-} from "react-icons/fa";
+import { FaUser, FaUsers, FaSignOutAlt, FaHome } from "react-icons/fa";
 
 const DashboardSidebar = () => {
   const { user, userLogout } = useContext(AuthContext);
@@ -39,24 +31,38 @@ const DashboardSidebar = () => {
               <span>Dashboard</span>
             </NavLink>
           </li>
-          <li className="px-4 py-2 hover:bg-gray-700">
-            <NavLink
-              to="/dashboard/profile"
-              className="flex items-center space-x-2"
-            >
-              <FaUser />
-              <span>Profile</span>
-            </NavLink>
-          </li>
-          <li className="px-4 py-2 hover:bg-gray-700">
-            <NavLink
-              to="/dashboard/allusers"
-              className="flex items-center space-x-2"
-            >
-              <FaUsers />
-              <span>All Users</span>
-            </NavLink>
-          </li>
+          {user?.isActive && (
+            <li className="px-4 py-2 hover:bg-gray-700">
+              <NavLink
+                to="/dashboard/profile"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-orange-600 font-semibold flex items-center space-x-2"
+                    : "flex items-center space-x-2"
+                }
+              >
+                <FaUser />
+                <span>Profile</span>
+              </NavLink>
+            </li>
+          )}
+          {user?.isActive && user?.isAdmin && (
+            <>
+              <li className="px-4 py-2 hover:bg-gray-700">
+                <NavLink
+                  to="/dashboard/allusers"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-orange-600 font-semibold flex items-center space-x-2"
+                      : "flex items-center space-x-2"
+                  }
+                >
+                  <FaUsers />
+                  <span>All Users</span>
+                </NavLink>
+              </li>
+            </>
+          )}
           <li className="px-4 py-2 hover:bg-gray-700">
             <NavLink
               to="#"

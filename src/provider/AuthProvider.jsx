@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
           displayName: displayName,
           email: res.user.email,
           phone: phone,
-          photoURL: photoURL,
+          photoURL: photoURL || "/profile-placeholder.png",
           address: address,
           isAdmin: false,
           isActive: true,
