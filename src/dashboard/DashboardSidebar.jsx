@@ -1,7 +1,15 @@
 import React, { useContext } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
-import { FaUser, FaUsers, FaSignOutAlt, FaHome } from "react-icons/fa";
+import {
+  FaUser,
+  FaUsers,
+  FaSignOutAlt,
+  FaHome,
+  FaList,
+  FaCar,
+  FaCartPlus,
+} from "react-icons/fa";
 
 const DashboardSidebar = () => {
   const { user, userLogout } = useContext(AuthContext);
@@ -26,23 +34,44 @@ const DashboardSidebar = () => {
       <nav className="flex-1 text-[12px] sm:text-sm">
         <ul>
           <li className="px-4 py-2 hover:bg-gray-700">
-            <NavLink to="/dashboard" className="flex items-center space-x-2">
+            <NavLink
+              to="/dashboard"
+              end
+              className={({ isActive }) =>
+                isActive
+                  ? "text-orange-600 font-semibold flex items-center space-x-2"
+                  : "flex items-center space-x-2"
+              }
+            >
               <FaHome />
               <span>Dashboard</span>
             </NavLink>
           </li>
-          {user?.isActive && (
+          <li className="px-4 py-2 hover:bg-gray-700">
+            <NavLink
+              to="/dashboard/profile"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-orange-600 font-semibold flex items-center space-x-2"
+                  : "flex items-center space-x-2"
+              }
+            >
+              <FaUser />
+              <span>Profile</span>
+            </NavLink>
+          </li>
+          {user?.isActive && !user?.isAdmin && (
             <li className="px-4 py-2 hover:bg-gray-700">
               <NavLink
-                to="/dashboard/profile"
+                to="/dashboard/userproductlist"
                 className={({ isActive }) =>
                   isActive
                     ? "text-orange-600 font-semibold flex items-center space-x-2"
                     : "flex items-center space-x-2"
                 }
               >
-                <FaUser />
-                <span>Profile</span>
+                <FaCartPlus />
+                <span>My Cars</span>
               </NavLink>
             </li>
           )}
@@ -59,6 +88,32 @@ const DashboardSidebar = () => {
                 >
                   <FaUsers />
                   <span>All Users</span>
+                </NavLink>
+              </li>
+              <li className="px-4 py-2 hover:bg-gray-700">
+                <NavLink
+                  to="/dashboard/allcategories"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-orange-600 font-semibold flex items-center space-x-2"
+                      : "flex items-center space-x-2"
+                  }
+                >
+                  <FaList />
+                  <span>All Categories</span>
+                </NavLink>
+              </li>
+              <li className="px-4 py-2 hover:bg-gray-700">
+                <NavLink
+                  to="/dashboard/allproducts"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-orange-600 font-semibold flex items-center space-x-2"
+                      : "flex items-center space-x-2"
+                  }
+                >
+                  <FaCar />
+                  <span>All Cars</span>
                 </NavLink>
               </li>
             </>

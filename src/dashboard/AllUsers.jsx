@@ -159,12 +159,12 @@ const AllUsers = () => {
                   className={`mr-2 p-2 rounded-full text-white ${
                     user.isAdmin ? "bg-green-500" : "bg-blue-500"
                   } ${
-                    user.email === "super-admin@dev-master.com"
+                    user.email === "super-admin@nfscarshop.com"
                       ? "opacity-50 cursor-not-allowed"
                       : ""
                   }`}
                   title="Toggle Admin/User"
-                  disabled={user.email === "super-admin@dev-master.com"}
+                  disabled={user.email === "super-admin@nfscarshop.com"}
                 >
                   <FaUserShield />
                 </button>
@@ -179,12 +179,12 @@ const AllUsers = () => {
                 <button
                   onClick={() => handleClickedSetBlock(user)}
                   className={`p-2 rounded-full bg-red-500 text-white ${
-                    user.email === "super-admin@dev-master.com"
+                    user.email === "super-admin@nfscarshop.com"
                       ? "opacity-50 cursor-not-allowed"
                       : ""
                   }`}
                   title="Block User"
-                  disabled={user.email === "super-admin@dev-master.com"}
+                  disabled={user.email === "super-admin@nfscarshop.com"}
                 >
                   <ImBlocked />
                 </button>
