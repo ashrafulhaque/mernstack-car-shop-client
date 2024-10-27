@@ -18,7 +18,7 @@ const Categories = () => {
       .then((data) => {
         // Set the fetched data
         setCategories(data);
-        console.log("Fetched data:", data);
+        //console.log("Fetched data:", data);
         setLoading(false);
       })
       .catch((error) => {

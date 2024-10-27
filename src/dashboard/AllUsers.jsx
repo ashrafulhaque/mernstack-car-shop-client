@@ -342,7 +342,6 @@ const AllUsers = () => {
           </div>
         )}
       </div>
-      ;
     </>
   );
 };

@@ -1,30 +1,61 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import { FaEnvelope, FaEllipsisH } from "react-icons/fa";
 
 const LoginPage = () => {
   const { loginWithEmail, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-
-  // Get the "redirectPath" from state or default to "/dashboard"
   const redirectPath = location.state?.redirectPath || "/dashboard";
 
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
   useEffect(() => {
-    // Redirect to dashboard if the user is already logged in
     if (user) {
       navigate(redirectPath, { replace: true });
     }
   }, [user, navigate, redirectPath]);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Clear the corresponding error when user types
+    if (value) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
+
   const handleEmailLogin = (event) => {
     event.preventDefault();
 
-    const form = new FormData(event.currentTarget);
-    const email = form.get("email");
-    const password = form.get("password");
+    const { email, password } = formData;
+
+    // Client-side validation
+    const newErrors = {};
+    if (!email) {
+      newErrors.email = "Email field is required.";
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = "Please enter a valid email address.";
+    }
+    if (!password) {
+      newErrors.password = "Password field is required.";
+    } else if (password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters.";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
 
     loginWithEmail(email, password)
       .then(() => {
@@ -40,7 +71,6 @@ const LoginPage = () => {
       .catch((error) => {
         console.error("Login failed:", error);
 
-        // Display a detailed error message based on Firebase error code
         let errorMessage = "Sorry! An error occurred during login.";
         if (error.code === "auth/wrong-password") {
           errorMessage = "Sorry, incorrect password.";
@@ -73,25 +103,34 @@ const LoginPage = () => {
           className="max-w-sm mx-auto space-y-4"
         >
           <label className="input input-bordered flex items-center gap-2">
+            <FaEnvelope />
             <input
               name="email"
               type="text"
               className="grow"
               placeholder="Email"
-              required
+              value={formData.email}
+              onChange={handleChange}
             />
           </label>
+          {errors.email && (
+            <p className="text-red-600 text-sm">{errors.email}</p>
+          )}
 
           <label className="input input-bordered flex items-center gap-2">
+            <FaEllipsisH />
             <input
               name="password"
               type="password"
-              id="password"
               className="grow"
               placeholder="Password"
-              required
+              value={formData.password}
+              onChange={handleChange}
             />
           </label>
+          {errors.password && (
+            <p className="text-red-600 text-sm">{errors.password}</p>
+          )}
 
           <button type="submit" className="btn btn-neutral w-full">
             Login With Email
