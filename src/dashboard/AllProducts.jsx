@@ -194,7 +194,7 @@ const AllProducts = () => {
         <div className="bg-base-100 rounded-lg shadow-lg">
           {/* Header Section */}
           <div className="flex items-center justify-between p-6 border-b border-base-200">
-            <h2 className="text-2xl font-bold">All Cars</h2>
+            <h2 className="text-2xl font-bold">All Products</h2>
             <button
               onClick={() => {
                 setIsEditMode(false);
@@ -338,7 +338,7 @@ const AllProducts = () => {
                       }
                       required
                       min="0"
-                      step="1000"
+                      step="1"
                     />
                   </div>
 

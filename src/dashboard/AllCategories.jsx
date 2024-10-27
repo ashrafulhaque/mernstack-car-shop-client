@@ -306,7 +306,7 @@ const AllCategories = () => {
                 </div>
 
                 <div className="flex justify-end gap-2 mt-4">
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-accent">
                     {isEditMode ? "Update Category" : "Add Category"}
                   </button>
                   <button
@@ -315,7 +315,7 @@ const AllCategories = () => {
                       setIsAddModalOpen(false);
                       setIsEditMode(false);
                     }}
-                    className="btn btn-ghost"
+                    className="btn btn-error"
                   >
                     Cancel
                   </button>

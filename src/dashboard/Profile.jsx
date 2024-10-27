@@ -14,6 +14,7 @@ const Profile = () => {
     address: "",
   });
 
+  // Handle profile update submission
   const handleUpdate = async () => {
     try {
       const userUpdateData = {
@@ -25,34 +26,34 @@ const Profile = () => {
 
       updateProfile(userUpdateData)
         .then(() => {
-          toast.success("Congratulations! Profile updated successfully.", {
-            position: "bottom-right",
+          // Show success toast with DaisyUI styling
+          toast.success("Profile updated successfully!", {
+            position: "top-center",
             style: {
-              background: "green",
+              background: "#059669",
               color: "white",
+              borderRadius: "1rem",
             },
           });
         })
         .catch((error) => {
-          let errorMessage = "Error updating profile: " + error;
-          toast.error(errorMessage, {
-            position: "bottom-right",
+          toast.error(`Update failed: ${error}`, {
+            position: "top-center",
             style: {
-              background: "red",
+              background: "#DC2626",
               color: "white",
+              borderRadius: "1rem",
             },
           });
         });
 
-      // Close the modal upon successful update
       setIsEditModalOpen(false);
     } catch (error) {
       console.error("Error updating user:", error);
-      alert("There was an error updating the user. Please try again.");
     }
   };
 
-  // Open the edit modal with the user's current details
+  // Initialize edit modal with current user data
   const handleOpenEditModal = () => {
     setFormData({
       displayName: user.displayName || "",
@@ -62,129 +63,181 @@ const Profile = () => {
     });
     setIsEditModalOpen(true);
   };
+
   return (
     <>
       <Helmet>
         <title>Dashboard | Profile</title>
       </Helmet>
-      <div className="p-6 bg-white rounded-lg shadow-lg relative">
-        <div className="flex flex-col items-center">
-          <img
-            src={user?.photoURL ? user.photoURL : "/profile-placeholder.png"}
-            alt="Profile Picture"
-            className="w-36 h-36 object-cover rounded-full shadow-md"
-          />
-          <h2 className="mt-4 text-2xl font-bold text-gray-800">
-            {user?.displayName}
-          </h2>
-          <p className="text-gray-500">{user?.email}</p>
-          <div>
-            <strong
-              className={user?.isActive ? "text-green-500" : "text-red-500"}
-            >
-              {user?.isActive ? "Active" : "Blocked"}
-            </strong>
+
+      {/* Main profile card container */}
+      <div className="min-h-screen bg-base-200 py-8 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="card bg-base-100 shadow-xl">
+            {/* Profile header section */}
+            <div className="card-body relative">
+              {user?.isActive && (
+                <button
+                  className="btn btn-ghost btn-circle absolute top-4 right-4"
+                  onClick={handleOpenEditModal}
+                >
+                  <FiEdit className="w-6 h-6" />
+                </button>
+              )}
+
+              {/* Profile image and basic info */}
+              <div className="flex flex-col items-center gap-4">
+                <div className="avatar">
+                  <div className="w-32 h-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                    <img
+                      src={user?.photoURL || "/profile-placeholder.png"}
+                      alt="Profile"
+                    />
+                  </div>
+                </div>
+
+                <div className="text-center">
+                  <h2 className="text-2xl font-bold">{user?.displayName}</h2>
+                  <p className="text-base-content/70">{user?.email}</p>
+                  <div className="mt-2">
+                    <span
+                      className={`badge ${
+                        user?.isActive ? "badge-success" : "badge-error"
+                      } gap-2`}
+                    >
+                      {user?.isActive ? "Active" : "Blocked"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="divider">Profile Details</div>
+
+              {/* Profile details grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="stats bg-base-200 shadow">
+                  <div className="stat">
+                    <div className="stat-title">Role</div>
+                    <div className="stat-value text-sm font-semibold">
+                      {user?.isAdmin ? "Admin" : "User"}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="stats bg-base-200 shadow">
+                  <div className="stat">
+                    <div className="stat-title">Phone</div>
+                    <div className="stat-value text-sm font-semibold">
+                      {user?.phone || "N/A"}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="stats bg-base-200 shadow">
+                  <div className="stat">
+                    <div className="stat-title">Address</div>
+                    <div className="stat-value text-sm font-semibold">
+                      {user?.address || "N/A"}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="stats bg-base-200 shadow">
+                  <div className="stat">
+                    <div className="stat-title">User ID</div>
+                    <div className="stat-value text-sm font-semibold">
+                      {user?.uid}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div className="mt-6 w-full">
-          <h3 className="text-xl font-bold text-gray-700">Profile Details</h3>
-          <hr />
-          <ul className="mt-3 text-gray-600 space-y-2">
-            <li>
-              <strong>Role:</strong> {user?.isAdmin ? "Admin" : "User"}
-            </li>
-            <li>
-              <strong>Email:</strong> {user?.email}
-            </li>
-            <li>
-              <strong>Phone:</strong> {user?.phone || "N/A"}
-            </li>
-            <li>
-              <strong>Address:</strong> {user?.address || "N/A"}
-            </li>
-            <hr />
-            <li>
-              <strong>User ID:</strong> {user?.uid}
-            </li>
-          </ul>
-        </div>
-
-        {/* Edit Button with React Icon */}
-        {user?.isActive ? (
-          <button
-            className="absolute top-4 right-4 text-gray-500 hover:text-blue-600 transition-transform transform hover:scale-105"
-            onClick={handleOpenEditModal}
-          >
-            <FiEdit size={24} />
-          </button>
-        ) : null}
-
-        {/* Edit Modal */}
-        {isEditModalOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white p-6 rounded-lg w-1/3">
-              <h3 className="text-xl mb-4">Edit User</h3>
-              <div className="mb-4">
-                <label className="block text-sm font-medium">Name:</label>
+      {/* Edit Modal using DaisyUI modal component */}
+      {isEditModalOpen && (
+        <dialog className="modal modal-open">
+          <div className="modal-box">
+            <h3 className="font-bold text-lg m2-4">Edit Profile</h3>
+            <div className="divider my-1"></div>
+            <form className="space-y-1">
+              <div className="form-control -mt-1">
+                <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
                 <input
                   type="text"
-                  className="w-full p-2 border rounded"
+                  className="input input-bordered"
                   value={formData.displayName}
                   onChange={(e) =>
                     setFormData({ ...formData, displayName: e.target.value })
                   }
                 />
               </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium">Phone:</label>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Phone</span>
+                </label>
                 <input
                   type="text"
-                  className="w-full p-2 border rounded"
+                  className="input input-bordered"
                   value={formData.phone}
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
                   }
                 />
               </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium">Photo URL:</label>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo URL</span>
+                </label>
                 <input
                   type="text"
-                  className="w-full p-2 border rounded"
+                  className="input input-bordered"
                   value={formData.photoURL}
                   onChange={(e) =>
                     setFormData({ ...formData, photoURL: e.target.value })
                   }
                 />
               </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium">Address:</label>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Address</span>
+                </label>
                 <input
                   type="text"
-                  className="w-full p-2 border rounded"
+                  className="input input-bordered"
                   value={formData.address}
                   onChange={(e) =>
                     setFormData({ ...formData, address: e.target.value })
                   }
                 />
               </div>
-              <button
-                onClick={handleUpdate}
-                className="bg-blue-500 text-white p-2 rounded mr-2"
-              >
+            </form>
+
+            <div className="modal-action mt-2">
+              <button className="btn btn-accent" onClick={handleUpdate}>
                 Update
               </button>
               <button
+                className="btn btn-error"
                 onClick={() => setIsEditModalOpen(false)}
-                className="bg-gray-500 text-white p-2 rounded"
               >
                 Cancel
               </button>
             </div>
           </div>
-        )}
-      </div>
+          <form method="dialog" className="modal-backdrop">
+            <button onClick={() => setIsEditModalOpen(false)}>close</button>
+          </form>
+        </dialog>
+      )}
     </>
   );
 };
