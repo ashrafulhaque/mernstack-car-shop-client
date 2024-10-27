@@ -18,9 +18,8 @@ const AllProductsPage = () => {
         return response.json();
       })
       .then((data) => {
-        // Set the fetched data
         setproducts(data);
-        console.log("Fetched data:", data);
+        //console.log("Fetched data:", data);
         setLoading(false);
       })
       .catch((error) => {
