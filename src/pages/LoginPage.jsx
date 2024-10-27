@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
-import { FaEnvelope, FaEllipsisH } from "react-icons/fa";
+import { FaEnvelope, FaLock } from "react-icons/fa";
 
 const LoginPage = () => {
   const { loginWithEmail, user } = useContext(AuthContext);
@@ -118,7 +118,7 @@ const LoginPage = () => {
           )}
 
           <label className="input input-bordered flex items-center gap-2">
-            <FaEllipsisH />
+            <FaLock />
             <input
               name="password"
               type="password"

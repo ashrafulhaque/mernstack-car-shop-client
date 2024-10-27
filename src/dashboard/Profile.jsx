@@ -71,7 +71,7 @@ const Profile = () => {
       </Helmet>
 
       {/* Main profile card container */}
-      <div className="min-h-screen  py-8 px-4">
+      <div className="min-h-screen  pb-4 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="card bg-base-100 shadow-xl">
             {/* Profile header section */}

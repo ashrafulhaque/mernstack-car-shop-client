@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { FaPaypal, FaSpinner } from "react-icons/fa";
+import { AuthContext } from "../provider/AuthProvider";
 
 const UserProductList = () => {
+  const { user } = useContext(AuthContext);
   const [productcart, setProductcart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -19,14 +21,24 @@ const UserProductList = () => {
         return response.json();
       })
       .then((data) => {
-        setProductcart(data);
-        var totalAmount = data.reduce(function (previousValue, currentValue) {
-          return {
-            price: parseInt(previousValue.price) + parseInt(currentValue.price),
-          };
-        });
+        const userPurchases = data.filter(
+          (purchase) => purchase.email === user?.email
+        );
+        setProductcart(userPurchases);
+
+        // Set totalAmount to 0 if userPurchases is empty
+        const totalAmount = userPurchases.reduce(
+          (previousValue, currentValue) => {
+            return {
+              price:
+                parseInt(previousValue.price) + parseInt(currentValue.price),
+            };
+          },
+          { price: 0 } // Initial value
+        );
+
         setTotalAmount(totalAmount.price);
-        console.log("Fetched data:", data);
+        //console.log("Fetched data:", data);
         setLoading(false);
       })
       .catch((error) => {

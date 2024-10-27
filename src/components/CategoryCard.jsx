@@ -13,7 +13,7 @@ const CategoryCard = ({ category }) => {
         <h3 className="text-lg font-bold text-center mb-2">{category.name}</h3>
         <div className="w-[125px] mx-auto">
           <Link
-            to={`/allproducts/${category._id}`} // Dynamic route to product details
+            to={`/productsbycaterogy/${category._id}`} // Dynamic route to product details
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mt-4 inline-block"
           >
             View All Cars
