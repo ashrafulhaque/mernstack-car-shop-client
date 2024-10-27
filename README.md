@@ -4,6 +4,20 @@
 
 - **Website Link:** [NFS CARSHOP](https://mernstack-car-shop-client.vercel.app/)
 
+## 📝 Admin Credentials
+
+For testing admin features, use:
+
+- Email: admin@nfs.com
+- Password: 123456
+
+## 📝 User Credentials
+
+For testing user features, use:
+
+- Email: user@nfs.com
+- Password: 123456
+
 ## 🚀 Features
 
 ### User Features
@@ -83,20 +97,6 @@ npm install
 ```bash
 npm run dev
 ```
-
-## 📝 Admin Credentials
-
-For testing admin features, use:
-
-- Email: admin@nfs.com
-- Password: 123456
-
-## 📝 User Credentials
-
-For testing user features, use:
-
-- Email: user@nfs.com
-- Password: 123456
 
 ## 🔗 Links
 
